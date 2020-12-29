@@ -56,6 +56,12 @@ public class ToDoList extends AfPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ToDoList.this.setVisible(false);
+                if(ToDoList.this.display.getSelectedList()==ToDoList.this){
+                    for(Card card:ToDoList.this.Cards){
+                        card.setVisible(false);
+                    }
+                    ToDoList.this.display.setSelectedList(null);
+                }
                 ToDoList.this.display.getTodolist().remove(ToDoList.this);
             }
         });

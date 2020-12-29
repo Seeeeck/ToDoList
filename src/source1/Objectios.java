@@ -78,13 +78,13 @@ public class Objectios {
     public static void writeToDoList(Display display)  {
         File file = new File("todolist.xml");
         XMLWriter xw = null;
-        if(file.exists()){
-            file.delete();
-        }
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
         try{
