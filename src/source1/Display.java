@@ -200,32 +200,36 @@ public class Display extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode()==KeyEvent.VK_ENTER && !searchBox.getText().equals("")){
-                    String temp = searchBox.getText().trim();
-                    changeShowPanel("search");
-                    if(selectedList != null){
-                        for(Card card:selectedList.getCards()){
-                            card.setVisible(false);
-                        }
-                        selectedList.setBgColor(Color.LIGHT_GRAY);
-                        selectedList.getListNameL().setForeground(Color.BLACK);
-                        selectedList.getCardNumL().setForeground(Color.BLACK);
-                        selectedList = null;
-
-                    }
-                    clearShowCards();
-                    for(ToDoList todo:todolist){
-                        for(Card card: todo.getCards()){
-                            if(card.getMemoT().getText().contains(temp) || card.getTitleT().getText().contains(temp) ){
-                                showCards.add(card);
-                                card.setVisible(true);
-                            }
-                        }
-                    }
+                    search_();
                 }
             }
         });
 
 
+    }
+
+    public void search_(){
+        String temp = searchBox.getText().trim();
+        changeShowPanel("search");
+        if(selectedList != null){
+            for(Card card:selectedList.getCards()){
+                card.setVisible(false);
+            }
+            selectedList.setBgColor(Color.LIGHT_GRAY);
+            selectedList.getListNameL().setForeground(Color.BLACK);
+            selectedList.getCardNumL().setForeground(Color.BLACK);
+            selectedList = null;
+
+        }
+        clearShowCards();
+        for(ToDoList todo:todolist){
+            for(Card card: todo.getCards()){
+                if(card.getMemoT().getText().contains(temp) || card.getTitleT().getText().contains(temp) ){
+                    showCards.add(card);
+                    card.setVisible(true);
+                }
+            }
+        }
     }
 
     public void clearShowCards(){

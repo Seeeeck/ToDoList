@@ -51,7 +51,6 @@ public class Card extends AfPanel {
         //end.setLayout(new AfXLayout());
         //end.add(memoT,"96%");
         memoT.setBorder(null);
-
         memoT.setFont(new Font("Menlo", Font.PLAIN,12));
         memoT.setForeground(Color.GRAY);
         memoT.setLineWrap(true);

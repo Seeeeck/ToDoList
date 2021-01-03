@@ -63,6 +63,7 @@ public class ToDoList extends AfPanel {
                     ToDoList.this.display.setSelectedList(null);
                 }
                 ToDoList.this.display.getTodolist().remove(ToDoList.this);
+                ToDoList.this.display.search_();
             }
         });
 
