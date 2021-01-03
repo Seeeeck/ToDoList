@@ -129,6 +129,7 @@ public class ToDoList extends AfPanel {
             public void mousePressed(MouseEvent e) {
                 if(e.getButton()==MouseEvent.BUTTON1){
                     boolean isChanged = false;
+                    ToDoList.this.display.clearShowCards();
                     if(ToDoList.this != ToDoList.this.display.getSelectedList()){
                         isChanged = true;
                     }
@@ -145,6 +146,7 @@ public class ToDoList extends AfPanel {
                         for(Card card:Cards){
                             card.setVisible(true);
                         }
+                        ToDoList.this.display.changeShowPanel("list");
                         setBgColor(new Color(0x1296db));
                         listNameL.setForeground(Color.WHITE);
                         cardNumL.setForeground(Color.WHITE);

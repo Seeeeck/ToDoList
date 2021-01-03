@@ -9,22 +9,26 @@ import source1.appright.AddCardButton;
 import source1.appright.Card;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Appのwindowを作成するClass
  */
 public class Display extends JFrame {
     private AfPanel root;
-    private AfPanel left1, right1,rightStart2,rightEnd2,
+    private AfPanel left1, right1,rightStart,rightStart2,rightEnd2,
     leftStart2,leftCenter2,leftEnd2;
     private JLabel listNameL;
     private JButton addCardB,addListB;
     private ArrayList<ToDoList> todolist;
     private ArrayList<Card> showCards;
     private ToDoList selectedList;
+    private JTextField searchBox;
+    private String defaultText;
+    private CardLayout rightCardLayout;
+
 
     public Display(String title){
         super(title);
@@ -77,22 +81,43 @@ public class Display extends JFrame {
         myList.setFont(new Font("Menlo",1,14));
         leftCenter2.add(myList);
 
+        defaultText = "検索";
+        searchCard();
+
 
         //2_right
+        rightStart = new AfPanel();
+        rightCardLayout = new CardLayout();
+        rightStart.setLayout(rightCardLayout);
         rightStart2 = new AfPanel();
+        AfPanel rightStartSearch = new AfPanel();
+
+        rightStart.add(rightStart2,"list");
+        rightStart.add(rightStartSearch,"search");
+        changeShowPanel("list");
         rightEnd2 = new AfPanel();
         rightStart2.preferredHeight(40);
         rightEnd2.padding(10,13,0,0);
         rightStart2.setLayout(new AfXLayout());
         rightEnd2.setLayout(new AfYLayout(10));
         rightStart2.padding(3,13,0,5);
-        right1.add(rightStart2,BorderLayout.PAGE_START);
+
+        rightStartSearch.preferredHeight(40);
+        rightStartSearch.padding(3,13,0,5);
+        rightStartSearch.setLayout(new AfXLayout());
+        JLabel searchNameL = new JLabel("検索結果");
+        searchNameL.setFont(new Font(Font.MONOSPACED,Font.BOLD,26));
+        searchNameL.setForeground(new Color(0x1296db));
+        rightStartSearch.add(searchNameL,"1w");
+
+        right1.add(rightStart,BorderLayout.PAGE_START);
         right1.add(rightEnd2,BorderLayout.CENTER);
         //2_rightStart  ListName and addCardButton
         listNameL = new JLabel("");
-        listNameL.setForeground(new Color(0x1296db));
         listNameL.setFont(new Font(Font.MONOSPACED,Font.BOLD,26));
         rightStart2.add(listNameL,"1w");
+
+
 
         addCardB = new AddCardButton();
         addCardB.addActionListener(new ActionListener() {
@@ -138,6 +163,84 @@ public class Display extends JFrame {
         leftCenter2.updateUI();
 
     }
+
+    private void searchCard(){
+        searchBox = new JTextField();
+        searchBox.setText(defaultText);
+        searchBox.setForeground(new Color(0x505050));
+        JLabel searchIcon = new JLabel();
+        searchIcon.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/todo1.1/src/images/chazhao.png"));
+        leftStart2.setLayout(new AfXLayout());
+        leftStart2.add(searchIcon,"17px");
+        leftStart2.add(searchBox,"88%");
+        searchBox.setFont(new Font("Menlo", Font.PLAIN,15));
+        searchBox.setBackground(new Color(0xa9a9a9));
+        searchIcon.setFocusable(true);
+        showCards = new ArrayList<>();
+        searchBox.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                String temp = searchBox.getText();
+                if(temp.equals(defaultText)){
+                    searchBox.setText("");
+                    searchBox.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                String temp = searchBox.getText();
+                if(temp.equals("")){
+                    searchBox.setText(defaultText);
+                    searchBox.setForeground(new Color(0x505050));
+                }
+            }
+        });
+        searchBox.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode()==KeyEvent.VK_ENTER && !searchBox.getText().equals("")){
+                    String temp = searchBox.getText().trim();
+                    changeShowPanel("search");
+                    if(selectedList != null){
+                        for(Card card:selectedList.getCards()){
+                            card.setVisible(false);
+                        }
+                        selectedList.setBgColor(Color.LIGHT_GRAY);
+                        selectedList.getListNameL().setForeground(Color.BLACK);
+                        selectedList.getCardNumL().setForeground(Color.BLACK);
+                        selectedList = null;
+
+                    }
+                    clearShowCards();
+                    for(ToDoList todo:todolist){
+                        for(Card card: todo.getCards()){
+                            if(card.getMemoT().getText().contains(temp) || card.getTitleT().getText().contains(temp) ){
+                                showCards.add(card);
+                                card.setVisible(true);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    public void clearShowCards(){
+        for(Iterator iter = showCards.iterator();iter.hasNext();){
+            Card c = (Card)iter.next();
+            c.setVisible(false);
+        }
+        showCards.clear();
+    }
+
+    public void changeShowPanel(String name){
+        rightCardLayout.show(rightStart,name);
+
+    }
+
 
     public void setShowCards(ArrayList<Card> showCards) {
         this.showCards = showCards;
