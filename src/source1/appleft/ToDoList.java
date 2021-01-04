@@ -38,16 +38,7 @@ public class ToDoList extends AfPanel {
         changeName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane a = new JOptionPane();
-                String input = JOptionPane.showInputDialog(ToDoList.this,"リストネーム:",getListNameL().getText());
-                if(input != null){
-                    if(!input.equals("")){
-                        ToDoList.this.listNameL.setText(input);
-                        ToDoList.this.display.getListNameL().setText(input);
-                    }else{
-                        JOptionPane.showMessageDialog(ToDoList.this,"リストネームを入力してください.");
-                    }
-                }
+                nameChanged();
 
             }
         });
@@ -124,6 +115,9 @@ public class ToDoList extends AfPanel {
                 if (e.getButton() == MouseEvent.BUTTON3){
                     popup.show(e.getComponent(),e.getX(),e.getY());
                 }
+                if(e.getClickCount()==2){
+                    nameChanged();
+                }
             }
 
             @Override
@@ -165,6 +159,19 @@ public class ToDoList extends AfPanel {
 
 
 
+    }
+
+    private void nameChanged(){
+        JOptionPane a = new JOptionPane();
+        String input = JOptionPane.showInputDialog(this,"リストネーム:",getListNameL().getText());
+        if(input != null){
+            if(!input.equals("")){
+                listNameL.setText(input);
+                display.getListNameL().setText(input);
+            }else{
+                JOptionPane.showMessageDialog(this,"リストネームを入力してください.");
+            }
+        }
     }
 
     public void seticon(){
