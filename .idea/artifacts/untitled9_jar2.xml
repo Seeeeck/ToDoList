@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="untitled9:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/untitled9_jar2</output-path>
+    <root id="archive" name="untitled9.jar">
+      <element id="module-output" name="untitled9" />
+      <element id="extracted-dir" path="$USER_HOME$/Library/Mobile Documents/com~apple~CloudDocs/Java/jaxen-1.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../dom4j-2.0.3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
