@@ -169,7 +169,7 @@ public class Display extends JFrame {
         searchBox.setText(defaultText);
         searchBox.setForeground(new Color(0x505050));
         JLabel searchIcon = new JLabel();
-        searchIcon.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/todo1.1/src/images/chazhao.png"));
+        searchIcon.setIcon(new ImageIcon("src/images/chazhao.png"));
         leftStart2.setLayout(new AfXLayout());
         leftStart2.add(searchIcon,"17px");
         leftStart2.add(searchBox,"88%");

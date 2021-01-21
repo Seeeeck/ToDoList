@@ -23,7 +23,7 @@ public class ToDoList extends AfPanel {
     public ToDoList(Display display) {
         this.display = display;
         listNameL = new JLabel("新規リスト");
-        listNameL.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/untitled9/src/images/orange.png"));
+        listNameL.setIcon(new ImageIcon("src/images/orange.png"));
         setLayout(new AfXLayout());
         Cards = new ArrayList<>();
         padding(0,4,0,1);
@@ -176,23 +176,23 @@ public class ToDoList extends AfPanel {
 
     public void seticon(){
         if(color.getRed()==31 && color.getGreen() == 31 && color.getBlue()==255){
-            listNameL.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/untitled9/src/images/green.png"));
+            listNameL.setIcon(new ImageIcon("src/images/green.png"));
         }
         if(color.getRed()==143 && color.getGreen() == 31 && color.getBlue()==255){
-            listNameL.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/untitled9/src/images/zise.png"));
+            listNameL.setIcon(new ImageIcon("src/images/zise.png"));
         }
         if(color.getRed()==255 && color.getGreen() == 31 && color.getBlue()==143){
-            listNameL.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/untitled9/src/images/pink2.png"));
+            listNameL.setIcon(new ImageIcon("src/images/pink2.png"));
         }
         if(color.getRed()==255 && color.getGreen() == 143 && color.getBlue()==31){
-            listNameL.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/untitled9/src/images/orange.png"));
+            listNameL.setIcon(new ImageIcon("src/images/orange.png"));
 
         }
         if(color.getRed()==31 && color.getGreen() == 255 && color.getBlue()==143){
-            listNameL.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/untitled9/src/images/blue.png"));
+            listNameL.setIcon(new ImageIcon("src/images/blue.png"));
         }
         if(color.getRed()==31 && color.getGreen() == 255 && color.getBlue()==255){
-            listNameL.setIcon(new ImageIcon("/Users/sunyuqiang/IdeaProjects/untitled9/src/images/lightGreen.png"));
+            listNameL.setIcon(new ImageIcon("src/images/lightGreen.png"));
         }
     }
 

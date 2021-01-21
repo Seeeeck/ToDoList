@@ -40,23 +40,30 @@ public class Objectios {
                 for(Element list:toDoLists.elements()){
                     ToDoList l1 = new ToDoList(display);
                     for(Element temp1:list.elements()){
-                        if(temp1.getName().equals("listname")){
-                            l1.getListNameL().setText((String) temp1.getData());
-                        }else if(temp1.getName().equals("cardlist")){
-                            for(Element card:temp1.elements()){
-                                Card temp_card = new Card(l1);
-                                for(Element temp2:card.elements()){
-                                    if(temp2.getName().equals("title")){
-                                        temp_card.getTitleT().setText((String)temp2.getData());
-                                    }else if(temp2.getName().equals("memo")){
-                                        temp_card.getMemoT().setText((String)temp2.getData());
+                        switch (temp1.getName()) {
+                            case "listname":
+                                l1.getListNameL().setText((String) temp1.getData());
+                                break;
+                            case "cardlist":
+                                for (Element card : temp1.elements()) {
+                                    Card temp_card = new Card(l1);
+                                    for (Element temp2 : card.elements()) {
+                                        if (temp2.getName().equals("title")) {
+                                            temp_card.getTitleT().setText((String) temp2.getData());
+                                            if(!temp2.getData().equals(temp_card.getDefaultTitle())){
+                                                temp_card.getTitleT().setForeground(Color.BLACK);
+                                            }
+                                        } else if (temp2.getName().equals("memo")) {
+                                            temp_card.getMemoT().setText((String) temp2.getData());
+                                        }
                                     }
+                                    l1.getCards().add(temp_card);
                                 }
-                                l1.getCards().add(temp_card);
-                            }
-                        }else if(temp1.getName().equals("color")){
-                            String[] strs = temp1.getText().split(",");
-                            l1.setColor(new Color(Integer.parseInt(strs[0]),Integer.parseInt(strs[1]),Integer.parseInt(strs[2])));
+                                break;
+                            case "color":
+                                String[] strs = temp1.getText().split(",");
+                                l1.setColor(new Color(Integer.parseInt(strs[0]), Integer.parseInt(strs[1]), Integer.parseInt(strs[2])));
+                                break;
                         }
                     }
                     display.getTodolist().add(l1);

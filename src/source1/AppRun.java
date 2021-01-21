@@ -15,7 +15,6 @@ public class AppRun {
         if(obj == null){
             display = new Display("ToDoList");
         }else {
-            System.out.println("111");
             display = obj;
         }
         display.addWindowListener(new WindowAdapter() {
